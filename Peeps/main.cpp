@@ -75,11 +75,11 @@ int main() {
 
   std::array<Peep, 5> peeps =
   {
-    Peep(0, 1, "Liam", forks, write_guard, 3),
-    Peep(1, 2, "Will", forks, write_guard, 3),
-    Peep(2, 3, "Jess", forks, write_guard, 3),
-    Peep(3, 4, "Sara", forks, write_guard, 3),
-    Peep(4, 0, "Tomy", forks, write_guard, 3),
+    Peep(0, 1, "Liam", std::ref(forks), std::ref(write_guard), 3),
+    Peep(1, 2, "Will", std::ref(forks), std::ref(write_guard), 3),
+    Peep(2, 3, "Jess", std::ref(forks), std::ref(write_guard), 3),
+    Peep(3, 4, "Sara", std::ref(forks), std::ref(write_guard), 3),
+    Peep(4, 0, "Tomy", std::ref(forks), std::ref(write_guard), 3),
   };
 
   std::vector<std::thread> chairs;
