@@ -18,9 +18,7 @@ class Peep
 {
 public:
   Peep(
-       int left,
-       int right,
-       const std::string& name,
+       int left, int right, const std::string& name,
        std::array<std::mutex, 5>& forks,
        std::mutex& write_guard,
        int forks_till_full
@@ -79,11 +77,11 @@ int main() {
 
   std::array<Peep, 5> peeps =
   {
-    Peep(0, 1, std::ref(names[0]), std::ref(forks), std::ref(write_guard), 3),
-    Peep(1, 2, std::ref(names[1]), std::ref(forks), std::ref(write_guard), 3),
-    Peep(2, 3, std::ref(names[2]), std::ref(forks), std::ref(write_guard), 3),
-    Peep(3, 4, std::ref(names[3]), std::ref(forks), std::ref(write_guard), 3),
-    Peep(4, 0, std::ref(names[4]), std::ref(forks), std::ref(write_guard), 3),
+    Peep(0, 1, names[0], forks, write_guard, 3),
+    Peep(1, 2, names[1], forks, write_guard, 3),
+    Peep(2, 3, names[2], forks, write_guard, 3),
+    Peep(3, 4, names[3], forks, write_guard, 3),
+    Peep(4, 0, names[4], forks, write_guard, 3)
   };
 
   std::vector<std::thread> chairs;
