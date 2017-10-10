@@ -1,3 +1,11 @@
+//
+//  main.cpp
+//  Peeps
+//
+//  Created by William Wayland on 9/10/17.
+//  Copyright © 2017 William Wayland. All rights reserved.
+//
+
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -67,11 +75,11 @@ int main() {
 
   std::array<Peep, 5> peeps =
   {
-    Peep(0, 1, "liam", forks, write_guard, 3),
-    Peep(1, 2, "will", forks, write_guard, 3),
-    Peep(2, 3, "jess", forks, write_guard, 3),
-    Peep(3, 4, "sara", forks, write_guard, 3),
-    Peep(4, 0, "tomy", forks, write_guard, 3),
+    Peep(0, 1, "Liam", forks, write_guard, 3),
+    Peep(1, 2, "Will", forks, write_guard, 3),
+    Peep(2, 3, "Jess", forks, write_guard, 3),
+    Peep(3, 4, "Sara", forks, write_guard, 3),
+    Peep(4, 0, "Tomy", forks, write_guard, 3),
   };
 
   std::vector<std::thread> chairs;
@@ -86,7 +94,6 @@ int main() {
   }
 
   std::cout << "Finished..." << std::endl;
-  std::cin.get();
 
   return 0;
 }
