@@ -20,7 +20,7 @@ public:
   Peep(
        int left,
        int right,
-       std::string name,
+       const std::string& name,
        std::array<std::mutex, 5>& forks,
        std::mutex& write_guard,
        int forks_till_full
@@ -48,7 +48,7 @@ public:
       write_guard_.unlock();
 
       // Eating.. yum!
-      std::this_thread::sleep_for(std::chrono::milliseconds(300));
+      std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
       write_guard_.lock();
       std::cout << name_ << " has finished eating..." << std::endl;
@@ -61,9 +61,10 @@ public:
   {
     return std::thread(&Peep::eat, this);
   }
+
 private:
   int left_, right_;
-  std::string name_;
+  const std::string& name_;
   std::array<std::mutex, 5>& forks_;
   std::mutex& write_guard_;
   int forks_till_full_;
@@ -73,13 +74,16 @@ int main() {
   std::array<std::mutex, 5> forks;
   std::mutex write_guard;
 
+  const std::array<std::string, 5> names =
+  { "Karl Marx", "Lenin", "Fidel Castro", "Xi Jinping", "Leon Trotsky" };
+
   std::array<Peep, 5> peeps =
   {
-    Peep(0, 1, "Liam", std::ref(forks), std::ref(write_guard), 3),
-    Peep(1, 2, "Will", std::ref(forks), std::ref(write_guard), 3),
-    Peep(2, 3, "Jess", std::ref(forks), std::ref(write_guard), 3),
-    Peep(3, 4, "Sara", std::ref(forks), std::ref(write_guard), 3),
-    Peep(4, 0, "Tomy", std::ref(forks), std::ref(write_guard), 3),
+    Peep(0, 1, std::ref(names[0]), std::ref(forks), std::ref(write_guard), 3),
+    Peep(1, 2, std::ref(names[1]), std::ref(forks), std::ref(write_guard), 3),
+    Peep(2, 3, std::ref(names[2]), std::ref(forks), std::ref(write_guard), 3),
+    Peep(3, 4, std::ref(names[3]), std::ref(forks), std::ref(write_guard), 3),
+    Peep(4, 0, std::ref(names[4]), std::ref(forks), std::ref(write_guard), 3),
   };
 
   std::vector<std::thread> chairs;
